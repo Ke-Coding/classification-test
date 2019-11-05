@@ -107,11 +107,11 @@ def train(net: nn.Module):
 
 
 def train_from_scratch(net):
-    print('start training from scratch\n')
+    print('=== start training from scratch ===\n')
     train_acc_history, test_acc_history, train_loss_history, test_loss_history, lr_history = train(net)
     final_test_acc, _ = test(net)
     final_acc_str = '%.2f' % (100 * final_test_acc)
-    print('\nfinal test acc: %s\n' % final_acc_str)
+    print('\n=== final test acc: %s ===\n' % final_acc_str)
     net.save(final_acc_str)
     plot_curves(train_acc_history, test_acc_history, train_loss_history, test_loss_history, lr_history)
 
@@ -121,11 +121,11 @@ def fine_tune(net):
     MAX_EPOCH = 1
     BASIC_LR /= 5
     net.load('97.26')
-    print('start fine tuning\n')
+    print('=== start fine tuning ===\n')
     train_acc_history, test_acc_history, train_loss_history, test_loss_history, lr_history = train(net)
     final_test_acc, _ = test(net)
     final_acc_str = '%.2f' % (100 * final_test_acc)
-    print('\nfinal test acc: %s\n' % final_acc_str)
+    print('\n=== final test acc: %s ===\n' % final_acc_str)
     net.save(final_acc_str)
     plot_curves(train_acc_history, test_acc_history, train_loss_history, test_loss_history, lr_history)
 
@@ -136,7 +136,7 @@ if __name__ == '__main__':
     #                    hid_dims=[128, 64],
     #                    dropout_p=None)
     
-    print('cuda is available\n' if USING_GPU else 'cuda is not available\n')
+    print('\n=== cuda is available ===\n' if USING_GPU else '=== cuda is not available ===\n')
     
     BASIC_LR *= 25
     MIN_LR *= 25
@@ -151,4 +151,4 @@ if __name__ == '__main__':
     start_sec = time.time()
     # fine_tune(net)
     train_from_scratch(net)
-    print('time cost: %.2fs\n' % (time.time() - start_sec, ))
+    print('=== time cost: %.2fs ===\n' % (time.time() - start_sec, ))
